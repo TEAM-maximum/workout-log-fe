@@ -8,8 +8,16 @@ const App = () => {
   );
 
   var content = mainPage;
-
-  return <div className="App">{content}</div>;
+  
+  return (
+  
+  <div className="App">{content} 
+    <div>
+      Main Page 테스트중
+    </div>
+  </div>
+  
+  );
 };
 
 export default App;
