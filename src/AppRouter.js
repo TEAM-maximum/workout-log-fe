@@ -4,6 +4,9 @@ import App from "./App";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Todo from "./Todo";
+import WorkoutLog from "./WorkoutLog";
+
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const AppRouter = () => {
@@ -19,7 +22,11 @@ const AppRouter = () => {
             <Route path="/todo" element={<Todo />}>
             </Route>
             <Route path="/" element={<App />}>
-            </Route>       
+            </Route>
+            <Route path="/WorkoutLog" element={<WorkoutLog />}>
+            </Route>
+          
+
           </Routes>
         </div>
       </Router>
