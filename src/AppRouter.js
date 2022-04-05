@@ -3,6 +3,7 @@ import "./index.css";
 import App from "./App";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Todo from "./Todo";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const AppRouter = () => {
@@ -15,8 +16,10 @@ const AppRouter = () => {
             </Route>
             <Route path="/signup" element={<SignUp />}>
             </Route>
-            <Route path="/" element={<App />}>
+            <Route path="/todo" element={<Todo />}>
             </Route>
+            <Route path="/" element={<App />}>
+            </Route>       
           </Routes>
         </div>
       </Router>

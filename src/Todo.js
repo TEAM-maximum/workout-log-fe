@@ -1,79 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import TodoItem from "./TodoItem";
+import AddTodo from "./AddTodo.js";
+import Navbar from "./Navbar.js";
+import "./App.css";
 import {
-  ListItem,
-  ListItemText,
-  InputBase,
-  Checkbox,
-  ListItemSecondaryAction,
-  IconButton,
+  Paper,
+  List,
+  Container,
 } from "@material-ui/core";
+import { call} from "./service/ApiService"; // signout 추가
 
-import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
+const Todo = () => {
+  const [state, setState] = useState({
+    items: [],
+    /* 1. 로딩중이라는 상태이다. 생성자에 상태 변수를 추가한다. */
+    loading: true,
+  });
 
-const Todo = (props) => {
-  const [state, setState] = useState({ item: props.item, readOnly: true });
-  const deleteItem = props.deleteItem;
-  const update = props.update;
+  // componentDidMount 대신 userEffect 사용
+  useEffect(() => {
+    /* 2. userEffect에서 todo리스트를 가져오는 
+    GET 리퀘스트가 성공적으로 리턴하는 경우 loading을 false로 고친다. 
+    더 이상 로딩중이 아니라는 뜻이다. */
+    call("/todo", "GET", null).then((response) =>
+      setState({ items: response.data, loading: false })
+    );
+  }, []);
 
-  const deleteEventHandler = () => {
-    deleteItem(state.item);
+  const add = (item) => {
+    call("/todo", "POST", item).then((response) =>
+      setState({ items: response.data })
+    );
   };
 
-  const offReadOnlyMode = () => {
-    console.log("Event!", state.readOnly);
-    setState({ readOnly: false }, () => {
-      console.log("ReadOnly? ", state.readOnly);
-    });
+  const deleteItem = (item) => {
+    call("/todo", "DELETE", item).then((response) =>
+      setState({ items: response.data })
+    );
   };
 
-  const enterKeyEventHandler = (e) => {
-    if (e.key === "Enter") {
-      setState({ readOnly: true });
-      update(state.item);
-    }
+  const update = (item) => {
+    call("/todo", "PUT", item).then((response) =>
+      setState({ items: response.data })
+    );
   };
 
-  const editEventHandler = (e) => {
-    const thisItem = state.item;
-    thisItem.title = e.target.value;
-    setState({ item: thisItem });
-  };
-
-  const checkboxEventHandler = (e) => {
-    const thisItem = state.item;
-    thisItem.done = !thisItem.done;
-    setState({ item: thisItem });
-    update(state.item);
-  };
-
-  const item = state.item;
-  return (
-    <ListItem>
-      <Checkbox checked={item.done} onChange={checkboxEventHandler} />
-      <ListItemText>
-        <InputBase
-          inputProps={{
-            "aria-label": "naked",
-            readOnly: state.readOnly,
-          }}
-          type="text"
-          id={item.id}
-          name={item.id}
-          value={item.title}
-          fullWidth={true}
-          onClick={offReadOnlyMode}
-          onChange={editEventHandler}
-          onKeyPress={enterKeyEventHandler}
-        />
-      </ListItemText>
-
-      <ListItemSecondaryAction>
-        <IconButton aria-label="Delete Todo" onClick={deleteEventHandler}>
-          <DeleteOutlined />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
+  var todoItems = state.items.length > 0 && (
+    <Paper style={{ margin: 16 }}>
+      <List>
+        {state.items.map((item, idx) => (
+          <TodoItem
+            item={item}
+            key={item.id}
+            deleteItem={deleteItem}
+            update={update}
+          />
+        ))}
+      </List>
+    </Paper>
   );
+
+  /* 로딩중이 아닐 때 렌더링 할 부분 */
+  var todoListPage = (
+    <div>
+      <Navbar></Navbar>
+      <Container maxWidth="md">
+        <AddTodo add={add} />
+        <div className="TodoList">{todoItems}</div>
+      </Container>
+    </div>
+  );
+
+  /* 로딩중일 때 렌더링 할 부분 */
+  var loadingPage = <h1> 로딩중.. </h1>;
+
+  var content = loadingPage;
+
+  if (!state.loading) {
+    /* 로딩중이 아니면 todoListPage를 선택*/
+    content = todoListPage;
+  }
+
+  /* 선택한 content 렌더링 */
+  return <div className="Todo">{content}</div>;
 };
 
 export default Todo;
