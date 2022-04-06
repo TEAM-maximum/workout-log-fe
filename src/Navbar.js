@@ -1,6 +1,3 @@
-import AddTodo from "./AddTodo.js";
-import { Link } from 'react-router-dom'
-
 import {
   Grid,
   Button,
@@ -17,22 +14,17 @@ const Navbar = () => {
         <Grid justify="space-between" container>
             <Grid item >
             <Button href="/" color="inherit"> 오운</Button>
-            
             </Grid>
 
-            
             <Grid>
              <Button href="/todo" color="inherit"> Todo</Button>
             </Grid>
-              
-
 
             <Grid>
             <Button href="/WorkoutLog" color="inherit" >
-                WorkoutLog
+                운동기록
             </Button>
             </Grid>
-
 
             <Grid>
             <Button color="inherit" onClick={signout}>

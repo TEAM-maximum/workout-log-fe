@@ -1,51 +1,37 @@
 import React from "react";
+import { signin } from "../service/ApiService";
 import {
+  Link,
   Button,
   TextField,
-  Link,
   Grid,
   Container,
   Typography,
 } from "@material-ui/core";
-import { signup } from "./service/ApiService";
 
-const SignUp = () => {
+const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    // 오브젝트에서 form에 저장된 데이터를 맵의 형태로 바꿔줌.
     const data = new FormData(event.target);
-    const username = data.get("username");
     const email = data.get("email");
     const password = data.get("password");
-    signup({ email: email, username: username, password: password }).then(
-      (response) => {
-        // 계정 생성 성공 시 login페이지로 리디렉트
-        window.location.href = "/login";
-      }
-    );
+    // ApiService의 signin 메서드를 사용 해 로그인.
+    signin({ email: email, password: password });
   };
 
   return (
     <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography component="h1" variant="h5">
+            로그인
+          </Typography>
+        </Grid>
+      </Grid>
       <form noValidate onSubmit={handleSubmit}>
+        {" "}
+        {/* submit 버튼을 누르면 handleSubmit이 실행됨. */}
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography component="h1" variant="h5">
-              계정 생성
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              autoComplete="fname"
-              name="username"
-              variant="outlined"
-              required
-              fullWidth
-              id="username"
-              label="유저 이름"
-              autoFocus
-            />
-          </Grid>
           <Grid item xs={12}>
             <TextField
               variant="outlined"
@@ -71,20 +57,16 @@ const SignUp = () => {
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" fullWidth variant="contained" color="primary">
-              계정 생성
+              로그인
             </Button>
           </Grid>
-        </Grid>
-        <Grid container justify="flex-end">
-          <Grid item>
-            <Link href="/login" variant="body2">
-              이미 계정이 있습니까? 로그인 하세요.
-            </Link>
-          </Grid>
+          <Link href="/signup" variant="body2">
+            <Grid item>계정이 없습니까? 여기서 가입 하세요.</Grid>
+          </Link>
         </Grid>
       </form>
     </Container>
   );
 };
 
-export default SignUp;
+export default Login;

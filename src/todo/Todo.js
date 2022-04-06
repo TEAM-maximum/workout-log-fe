@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo.js";
-import Navbar from "./Navbar.js";
-import "./App.css";
 import {
   Paper,
   List,
   Container,
 } from "@material-ui/core";
-import { call} from "./service/ApiService"; // signout 추가
+import { call} from "../service/ApiService"; // signout 추가
 
 const Todo = () => {
   const [state, setState] = useState({
@@ -63,7 +61,6 @@ const Todo = () => {
   /* 로딩중이 아닐 때 렌더링 할 부분 */
   var todoListPage = (
     <div>
-      <Navbar></Navbar>
       <Container maxWidth="md">
         <AddTodo add={add} />
         <div className="TodoList">{todoItems}</div>

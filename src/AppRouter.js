@@ -1,17 +1,18 @@
 import React from "react";
 import "./index.css";
 import App from "./App";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import Todo from "./Todo";
-import WorkoutLog from "./WorkoutLog";
-
+import Login from "./user/Login";
+import SignUp from "./user/SignUp";
+import Todo from "./todo/Todo";
+import WorkoutLog from "./workoutLog/WorkoutLog";
+import Navbar from "./Navbar.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const AppRouter = () => {
   return (
     <div>
+      <Navbar></Navbar>
       <Router>
         <div>
           <Routes>
@@ -23,10 +24,8 @@ const AppRouter = () => {
             </Route>
             <Route path="/" element={<App />}>
             </Route>
-            <Route path="/WorkoutLog" element={<WorkoutLog />}>
+            <Route path="/workoutLog" element={<WorkoutLog />}>
             </Route>
-          
-
           </Routes>
         </div>
       </Router>
