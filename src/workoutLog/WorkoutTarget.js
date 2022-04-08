@@ -1,20 +1,24 @@
-import React, { useState } from "react";
-import { Accordion, AccordionSummary, Typography, ListItemText, TextField, Paper, Button, Grid, InputBase } from "@material-ui/core";
-import {ExpandMoreIcon} from "@material-ui/icons/ExpandMore";
-const AddTodo = (props) => {
+import React, { } from "react";
+import { Typography, Card, CardActionArea, CardContent} from "@material-ui/core";
+
+const WorkoutTarget = (props) => {
+
+  const onItemClick = (e) => {
+    console.log("target select")
+    props.setTarget(e.target.innerText);
+  };
+  
   return (
     <div>
-        <Accordion>
-            <AccordionSummary
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-            >
-            {/* workoutName컴포넌트들을 출력한다. */}
-            <Typography>{props.item.target}</Typography>
-            </AccordionSummary>
-        </Accordion>
+      <Card>
+        <CardActionArea onClick={onItemClick}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">{props.targetItem}</Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </div>
   );
 };
 
-export default AddTodo;
+export default WorkoutTarget;
