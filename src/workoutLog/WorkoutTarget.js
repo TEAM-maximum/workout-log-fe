@@ -4,7 +4,6 @@ import { Typography, Card, CardActionArea, CardContent} from "@material-ui/core"
 const WorkoutTarget = (props) => {
 
   const onItemClick = (e) => {
-    console.log("target select")
     props.setTarget(e.target.innerText);
   };
   

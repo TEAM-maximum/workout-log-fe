@@ -4,7 +4,6 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 const WorkoutName = (props) => {
 
   const onItemClick = (e) => {
-    console.log("name select")
     props.setName(e.target.innerText);
   };
   
@@ -14,8 +13,8 @@ const WorkoutName = (props) => {
         {props.category.map((item, idx) => {
             if(item.target === props.target){
                 return(
-                    <ListItem button key={idx}>
-                        <ListItemText onClick={onItemClick}>{item.name}</ListItemText>
+                    <ListItem button key={idx} onClick={onItemClick}>
+                        <ListItemText >{item.name}</ListItemText>
                     </ListItem>
                 )
             }
