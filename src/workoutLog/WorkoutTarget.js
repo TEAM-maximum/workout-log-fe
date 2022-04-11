@@ -9,6 +9,7 @@ const WorkoutTarget = (props) => {
   
   return (
     <div>
+      <br/>
       <Card>
         <CardActionArea onClick={onItemClick}>
           <CardContent>

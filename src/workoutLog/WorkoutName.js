@@ -1,5 +1,5 @@
 import React, { } from "react";
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { Button, List, ListItem, ListItemText } from "@material-ui/core";
 
 const WorkoutName = (props) => {
 
@@ -21,6 +21,9 @@ const WorkoutName = (props) => {
         }
         )}
         </List>
+        <Button fullWidth variant="contained" onClick={props.resetTarget}>
+              뒤로가기
+        </Button>
     </div>
   );
 };

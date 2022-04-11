@@ -4,7 +4,7 @@ import App from "./App";
 import Login from "./user/Login";
 import SignUp from "./user/SignUp";
 import Todo from "./todo/Todo";
-import WorkoutLogAdd from "./workoutLog/WorkoutLogAdd";
+import WorkoutLog from "./workoutLog/WorkoutLog";
 import Navbar from "./Navbar.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -24,7 +24,7 @@ const AppRouter = () => {
             </Route>
             <Route path="/" element={<App />}>
             </Route>
-            <Route path="/workoutLog" element={<WorkoutLogAdd />}>
+            <Route path="/workoutLog" element={<WorkoutLog />}>
             </Route>
           </Routes>
         </div>
