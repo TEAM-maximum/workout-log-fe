@@ -27,21 +27,32 @@ const WorkoutLogAdd = (props) => {
       console.log("target:", target, "name:", name)
     }, [target, name]);
 
+    useEffect(() => {
+      console.log("r:",reps, "e:",weights)
+
+    }, [reps, weights])
     const workoutLogSubmit = () => {
       var tempReps = reps.length.toString()
       var tempWeights = reps.length.toString()
       reps.forEach(element => {
-        tempReps = tempReps + "-" + element
+        tempReps = tempReps + "," + element
       });
       weights.forEach(element => {
-        tempWeights = tempWeights + "-" + element
+        tempWeights = tempWeights + "," + element
       })
 
       var items = {date: props.date, setOrder: props.setOrder+1, target: target, name: name, weight: tempWeights, reps: tempReps}
 
-      call("/workoutlog", "POST", items).then((response) =>
+      call("/workoutlog", "POST", items).then((response) => {
         console.log(response)
-      );
+        if(!response.error) {
+          alert("등록 완료")
+        }
+        else{
+          alert("등록 실패")
+        }
+        window.location.href = "/workoutlog";
+      });
     };
 
     const resetTarget = () => {
@@ -49,6 +60,8 @@ const WorkoutLogAdd = (props) => {
     }
 
     const resetName = () => {
+      setWeights(["0"])
+      setReps(["0"])
       setName("")
     }
 
@@ -58,17 +71,23 @@ const WorkoutLogAdd = (props) => {
     }
 
     const editReps = (idx, value) => {
+      if(parseInt(value) < 0) {
+        value = 0
+      }
       var tempReps = reps.slice();
       tempReps[idx] = value
       setReps(tempReps)
     }
 
     const editWeights = (idx, value) => {
+      if(parseInt(value) < 0) {
+        value = 0
+      }
       var tempWeights = weights.slice();
       tempWeights[idx] = value
       setWeights(tempWeights)
     }
-
+    
     var workoutTargetList = (
       <div>
           {targets.map((targetItem, idx) => (
