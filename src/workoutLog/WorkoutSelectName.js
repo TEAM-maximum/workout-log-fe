@@ -1,7 +1,7 @@
 import React, { } from "react";
 import { Button, List, ListItem, ListItemText } from "@material-ui/core";
 
-const WorkoutName = (props) => {
+const WorkoutSelectName = (props) => {
 
   const onItemClick = (e) => {
     props.setName(e.target.innerText);
@@ -28,4 +28,4 @@ const WorkoutName = (props) => {
   );
 };
 
-export default WorkoutName;
+export default WorkoutSelectName;

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { Container, Button } from "@material-ui/core";
+import { Container, Button, Divider, Typography } from "@material-ui/core";
 
 import WorkoutLogAdd from "./WorkoutLogAdd";
+import WorkoutLogSetItem from "./WorkoutLogSetItem";
 
 import { call } from "../service/ApiService";
 
@@ -29,14 +30,18 @@ const WorkoutLog = () => {
         <div>
         <br/>
         <Container maxWidth="md">
-            {date}
-            {logData.map((el, idx) => (
-                <div>{idx+1} {el.name}</div>
-            ))}
-            <br/>
-            <Button fullWidth variant="contained" onClick={()=>setNextPage(true)}>
-              새 종목 입력
-            </Button>
+          <Typography>운동일지 : {date}</Typography>
+          <Divider></Divider>
+          <br/>
+
+          {logData.map((element, idx) => (
+              <WorkoutLogSetItem idx={idx} element={element}></WorkoutLogSetItem>
+          ))}
+          <br/>
+
+          <Button fullWidth variant="contained" onClick={()=>setNextPage(true)}>
+            새 종목 입력
+          </Button>
         </Container>
       </div>
     )

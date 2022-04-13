@@ -1,7 +1,7 @@
 import React, { } from "react";
 import { Typography, Card, CardActionArea, CardContent} from "@material-ui/core";
 
-const WorkoutTarget = (props) => {
+const WorkoutSelectTarget = (props) => {
 
   const onItemClick = (e) => {
     props.setTarget(e.target.innerText);
@@ -21,4 +21,4 @@ const WorkoutTarget = (props) => {
   );
 };
 
-export default WorkoutTarget;
+export default WorkoutSelectTarget;

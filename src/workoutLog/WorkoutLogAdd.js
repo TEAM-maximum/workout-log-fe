@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { Grid, Button, Container } from "@material-ui/core";
-import WorkoutTarget from "./WorkoutTarget";
-import WorkoutName from "./WorkoutName";
-import WorkoutSet from "./WorkoutSet";
+import WorkoutSelectTarget from "./WorkoutSelectTarget";
+import WorkoutSelectName from "./WorkoutSelectName";
+import WorkoutFillSet from "./WorkoutFillSet";
 
 import { call } from "../service/ApiService";
 
@@ -27,10 +27,6 @@ const WorkoutLogAdd = (props) => {
       console.log("target:", target, "name:", name)
     }, [target, name]);
 
-    useEffect(() => {
-      console.log("r:",reps, "e:",weights)
-
-    }, [reps, weights])
     const workoutLogSubmit = () => {
       var tempReps = reps.length.toString()
       var tempWeights = reps.length.toString()
@@ -91,7 +87,7 @@ const WorkoutLogAdd = (props) => {
     var workoutTargetList = (
       <div>
           {targets.map((targetItem, idx) => (
-            <WorkoutTarget key={idx} targetItem={targetItem} setTarget={setTarget}></WorkoutTarget>
+            <WorkoutSelectTarget key={idx} targetItem={targetItem} setTarget={setTarget}></WorkoutSelectTarget>
           ))}
           <br/>
           <Button fullWidth variant="contained" onClick={()=>props.setNextPage(false)}>
@@ -101,14 +97,14 @@ const WorkoutLogAdd = (props) => {
     );
 
     var workoutNameList = (
-      <WorkoutName target={target} category={category} setName={setName} resetTarget={resetTarget}></WorkoutName>
+      <WorkoutSelectName target={target} category={category} setName={setName} resetTarget={resetTarget}></WorkoutSelectName>
     )
 
     var workoutSets = (
       <div>
         <br/>
         {reps.map((rep, idx) => (
-          <WorkoutSet key={idx} rep={rep} weight={weights[idx]} idx={idx} editReps={editReps} editWeights={editWeights}></WorkoutSet>
+          <WorkoutFillSet key={idx} rep={rep} weight={weights[idx]} idx={idx} editReps={editReps} editWeights={editWeights}></WorkoutFillSet>
         ))}
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
