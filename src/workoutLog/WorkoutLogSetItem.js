@@ -6,7 +6,7 @@ const WorkoutLogSetItem = (props) => {
     const [reps, setReps] = useState([]);
 
     useEffect(() => {
-        setWeights(props.element.weight.split(',').slice(1));
+        setWeights(props.element.weights.split(',').slice(1));
         setReps(props.element.reps.split(',').slice(1));
       }, []);
     

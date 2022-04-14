@@ -37,7 +37,7 @@ const WorkoutLogAdd = (props) => {
         tempWeights = tempWeights + "," + element
       })
 
-      var items = {date: props.date, setOrder: props.setOrder+1, target: target, name: name, weight: tempWeights, reps: tempReps}
+      var items = {date: props.date, setOrder: props.setOrder+1, target: target, name: name, weights: tempWeights, reps: tempReps}
 
       call("/workoutlog", "POST", items).then((response) => {
         console.log(response)
