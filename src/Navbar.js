@@ -21,12 +21,6 @@ const Navbar = () => {
             </Grid>
 
             <Grid>
-            <Button href="/WorkoutLog" color="inherit" >
-                운동기록
-            </Button>
-            </Grid>
-
-            <Grid>
             <Button color="inherit" onClick={signout}>
                 로그아웃
             </Button>

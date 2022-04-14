@@ -24,8 +24,6 @@ const AppRouter = () => {
             </Route>
             <Route path="/" element={<App />}>
             </Route>
-            <Route path="/workoutLog" element={<WorkoutLog />}>
-            </Route>
           </Routes>
         </div>
       </Router>

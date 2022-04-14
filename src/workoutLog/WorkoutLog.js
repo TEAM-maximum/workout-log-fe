@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
 import { Container, Button, Divider, Typography } from "@material-ui/core";
+import moment from 'moment'
 
 import WorkoutLogAdd from "./WorkoutLogAdd";
 import WorkoutLogSetItem from "./WorkoutLogSetItem";
 
 import { call } from "../service/ApiService";
 
-const WorkoutLog = () => {
-    const [date, setDate] = useState("2022-02-22");
+const WorkoutLog = (props) => {
+    const [date, setDate] = useState(moment(props.date).format("YYYY-MM-DD"));
     const [setOrder, setSetOrder] = useState(1);
     const [logData, setLogData] = useState([]);
     const [nextPage, setNextPage] = useState(false);
@@ -16,14 +17,17 @@ const WorkoutLog = () => {
       if(localStorage.getItem("ACCESS_TOKEN") === "null") {
         window.location.href = "/login";
       }
+    }, []);
+
+    useEffect(() => {
       call("/workoutlog?date="+date, "GET", null).then((response) => {
         setSetOrder(response.data.length);
         setLogData(response.data)
       })
-    }, []);
+    }, [nextPage])
 
     useEffect(() => {
-        console.log(logData);
+        console.log("received log data: ",logData);
     }, [logData])
 
     var logs = (
@@ -41,6 +45,10 @@ const WorkoutLog = () => {
 
           <Button fullWidth variant="contained" onClick={()=>setNextPage(true)}>
             새 종목 입력
+          </Button>
+
+          <Button fullWidth variant="contained" onClick={()=>props.previousPage(false)}>
+            뒤로가기
           </Button>
         </Container>
       </div>

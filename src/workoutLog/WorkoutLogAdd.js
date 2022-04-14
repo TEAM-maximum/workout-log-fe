@@ -44,10 +44,11 @@ const WorkoutLogAdd = (props) => {
         if(!response.error) {
           alert("등록 완료")
         }
-        else{
-          alert("등록 실패")
-        }
-        window.location.href = "/workoutlog";
+        setTarget("")
+        setName("")
+        setWeights(["0"])
+        setReps(["0"])
+        props.setNextPage(false)
       });
     };
 
