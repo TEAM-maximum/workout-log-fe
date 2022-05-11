@@ -24,14 +24,14 @@ const WorkoutLog = (props) => {
         setSetOrder(response.data.length);
         setLogData(response.data.sort((a, b) => { if (a.setOrder < b.setOrder) return -1; if (a.setOrder > b.setOrder) return 1; return 0;}))
       })
-    }, [nextPage])
+    }, [nextPage, setOrder])
 
     useEffect(() => {
         console.log("received log data: ",logData);
     }, [logData])
 
     var logs = (
-        <div>
+      <div>
         <br/>
         <Container maxWidth="md">
           <Typography>운동일지 : {date}</Typography>
@@ -39,7 +39,7 @@ const WorkoutLog = (props) => {
           <br/>
 
           {logData.map((element, idx) => (
-              <WorkoutLogSetItem idx={idx} element={element}></WorkoutLogSetItem>
+              <WorkoutLogSetItem idx={idx} element={element} setSetOrder={setSetOrder}></WorkoutLogSetItem>
           ))}
           <br/>
 
