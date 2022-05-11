@@ -22,7 +22,7 @@ const WorkoutLog = (props) => {
     useEffect(() => {
       call("/workoutlog?date="+date, "GET", null).then((response) => {
         setSetOrder(response.data.length);
-        setLogData(response.data)
+        setLogData(response.data.sort((a, b) => { if (a.setOrder < b.setOrder) return -1; if (a.setOrder > b.setOrder) return 1; return 0;}))
       })
     }, [nextPage])
 
